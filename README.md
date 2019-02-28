@@ -6,6 +6,6 @@ It is marked in the file where you can change the webhook id and API token.
 
 # Packages used:
 
-npm request
-npm webhook-discord
-
+npm request,
+npm webhook-discord,
+npm node-schedule
