@@ -1,0 +1,36 @@
+{
+  "name": "sendfurryfriend2",
+  "version": "2.0.0",
+  "description": "An app with a web guide that can configure and send cat images to discord channels via webhooks",
+  "main": "send-cat.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cron-parser": "^2.7.3",
+    "define-properties": "^1.1.3",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "is-nan": "^1.2.1",
+    "long-timeout": "^0.1.1",
+    "moment": "^2.24.0",
+    "moment-timezone": "^0.5.23",
+    "node-schedule": "^1.3.2",
+    "object-keys": "^1.1.0",
+    "request": "^2.88.0",
+    "sorted-array-functions": "^1.2.0",
+    "webhook-discord": "^3.1.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gerrudo/SendFurryFriend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gerrudo/SendFurryFriend/issues"
+  },
+  "homepage": "https://github.com/Gerrudo/SendFurryFriend#readme"
+}
