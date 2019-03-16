@@ -40,13 +40,12 @@ function sendMsg(discordWebhookURL){
           embeds: [ { image: { url: jsonObject[0].url } } ] },
         json: true };
 
-      /*
       request(options, function (error, response, body) {
         if (error) throw new Error(error);
           console.error(error);
           res.status(500).send();
       });
-      */
+      
       console.log(moment().format('lll'),'>>>Message Sent');
 
     });
