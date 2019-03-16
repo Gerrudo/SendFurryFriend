@@ -1,7 +1,6 @@
 //SendFurryFriend, Thomas Turner 27/02/19
 
 //Dependancies
-var schedule = require('node-schedule');
 var request = require("request");
 var webhook = require("webhook-discord");
 var express = require('express');
@@ -61,8 +60,9 @@ app.get('/', function (req, res) {
   res.render('index.ejs');
 });
 app.get('/sendcat', function (req, res) {
+  console.log(req,body);
   sendMsg();
-  res.redirect('/');
+  //res.redirect('/');
 });
 
 const port=process.env.PORT || 8000
@@ -70,11 +70,5 @@ const port=process.env.PORT || 8000
 app.listen(port);
 console.log(moment().format('lll'),'>>>App is listening on PORT 8000');
 
-  //How often the message is sent, in crontab format
-  var j = schedule.scheduleJob('0 8 * * *', function(){
-
-    sendMsg();
-
-  });
 
   

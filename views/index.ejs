@@ -7,18 +7,19 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-</head>
+≈</head>
 <body>
 
 <div class="jumbotron text-center">
   <h1>SendaFurryFriend</h1>
   <p>Click the Button Below to reccive your friend!</p> 
 
-  <form action="/sendcat" method="GET">
-    <button>Send me a Cat</button>
-  </form>
+  <div class="form-group">
+    <label for="webhookurl">Your Discord webhook URL:</label>
+      <input type="text" class="form-control" id="webhookurl" placeholder="https://discordapp.com/api/webhooks/..." name="webhookurl">
+  </div>
 
-  
+  <button onclick="SendCat()">Send me a Cat</button>
 
 </div>
 
@@ -44,4 +45,12 @@
 </div>
   
 </body>
+<script>
+  function SendCat(){
+    var item={};
+    item.webhookurl = $('#webhookurl');
+    console.log(item.webhookurl);
+    $.post('/sendcat', item);
+  }
+</script>
 </html>
