@@ -2,7 +2,6 @@
 
 //Dependancies
 var request = require("request");
-var webhook = require("webhook-discord");
 var express = require('express');
 var moment = require('moment');
 var app = express();
@@ -11,7 +10,7 @@ var app = express();
 API REQUEST & WEBHOOK
 */
 
-function sendMsg(){
+function sendMsg(discordWebhookURL){
   var options = { method: 'GET',
       url: 'https://api.thecatapi.com/v1/images/search',
       headers: 
@@ -29,17 +28,25 @@ function sendMsg(){
 
       console.log(moment().format('lll'),'>>>URL:',jsonObject[0].url);
       
-      //Webhook goes here
-      const Hook = new webhook.Webhook("https://discordapp.com/api/webhooks/551890577604476939/AQMYJ0-57RRmM8J_OqtySQ_SnVryNzqxXQAv2oTKuaZAw7Q5kn3n1PM-He_vSy2uYtHZ");
-      //Your Message goes here
-      const msg = new webhook.MessageBuilder()
-                      .setName("Pet of the Day")
-                      .setColor("#aabbcc")
-                      .addField("Hello Faye! ", "Here's your floof for the day!")
-                      .setImage(jsonObject[0].url)
-                      .setTime();
-      
-      Hook.send(msg); 
+      //Sending to discord
+      var options = { method: 'POST',
+        url: discordWebhookURL,
+        headers: 
+        { 'Postman-Token': '166ba090-5cd7-48a4-8cae-4c856b5d8f49',
+          'cache-control': 'no-cache',
+          'Content-Type': 'application/json' },
+        body: 
+        { content: 'Here\'s your cat! Fresh from one of Azure\'s Data Centres.',
+          embeds: [ { image: { url: jsonObject[0].url } } ] },
+        json: true };
+
+      /*
+      request(options, function (error, response, body) {
+        if (error) throw new Error(error);
+          console.error(error);
+          res.status(500).send();
+      });
+      */
       console.log(moment().format('lll'),'>>>Message Sent');
 
     });
@@ -59,9 +66,15 @@ app.set('view engine', 'ejs');
 app.get('/', function (req, res) {
   res.render('index.ejs');
 });
-app.get('/sendcat', function (req, res) {
-  console.log(req,body);
-  sendMsg();
+
+app.use(express.json());
+app.use(express.urlencoded());
+
+app.post('/sendcat', function (req, res) {
+  res.send('ACCEPTED');
+  discordWebhookURL = req.body.webhookurl;
+  console.log(moment().format('lll'),'>>>Incoming Request 200 Accepted, Webhook URL: ',discordWebhookURL);
+  sendMsg(discordWebhookURL);
   //res.redirect('/');
 });
 
