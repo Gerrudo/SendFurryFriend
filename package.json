@@ -21,7 +21,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node app.js"
+    "start": "node send-cat.js"
   },
   "repository": {
     "type": "git",
