@@ -10,8 +10,8 @@ If you have any features or suggestions you'd like me to look at for this projec
 
 Thanks for checking out my repo!
 
-# Packages used:
+Packages used:
 
 npm request,
 npm moment,
-npm express,
+npm express
