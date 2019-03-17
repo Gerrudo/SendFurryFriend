@@ -58,10 +58,8 @@ function sendMsg(discordWebhookURL){
 EXPRESS WEB SERVER
 */
 
-// set ejs as rendering engine
 app.set('view engine', 'ejs');
 
-// render the ejs page
 app.get('/', function (req, res) {
   res.render('index.ejs');
 });
@@ -74,7 +72,6 @@ app.post('/sendcat', function (req, res) {
   discordWebhookURL = req.body.webhookurl;
   console.log(moment().format('lll'),'>>>Incoming Request 200 Accepted, Webhook URL: ',discordWebhookURL);
   sendMsg(discordWebhookURL);
-  //res.redirect('/');
 });
 
 const port=process.env.PORT || 8000
