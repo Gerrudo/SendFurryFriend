@@ -1,71 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <title>SendaFurryFriend</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" type="image/png"
+    href="https://sdl-stickershop.line.naver.jp/products/0/0/1/1014241/android/stickers/637242.png;compress=true" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
+
 <body>
 
-<div class="jumbotron text-center">
-  <h1>SendaFurryFriend</h1>
-  <p>Click the Button Below to reccive your friend!</p> 
+  <div class="jumbotron text-center">
+    <h1>SendaFurryFriend</h1>
 
-<div class="container">
-  <div class="form-group">
-    <label for="webhookurl">Your Discord webhook URL:</label>
-      <input type="text" class="form-control" id="webhookurl" placeholder="https://discordapp.com/api/webhooks/..." name="webhookurl">
+
+    <div class="container">
+      <div class="form-group">
+        <h3>Enter a Discord Webhook URI:</h3>
+        <input type="text" class="form-control" id="webhookurl" placeholder="https://discordapp.com/api/webhooks/..."
+          name="webhookurl">
+      </div>
+    </div>
+    <button class="btn" id="sendcatbtn" onclick="SendCat()">Send</button>
+    <button class="btn" id="sendcatbtn" onclick="ClearField()">Clear</button>
+    <br><br>
+    <img id="confused" class="img-responsive"
+      style="height: 7.5%; width: 7.5%; display: block; margin-left: auto; margin-right: auto;"
+      src="https://sdl-stickershop.line.naver.jp/products/0/0/1/1014241/android/stickers/637272.png;compress=true"
+      alt="Chania">
   </div>
-</div>
-  <button id="sendcatbtn"onclick="SendCat()">Send me a Cat</button>
 
-</div>
-
-<div class="container">
-  
-    <div class="col-sm-4">
-      <h3>Check it out!</h3>
-      <blockquote class="embedly-card"><h4><a href="https://github.com/Gerrudo/SendFurryFriend">Gerrudo/SendFurryFriend</a></h4><p>Contribute to Gerrudo/SendFurryFriend development by creating an account on GitHub.</p></blockquote>
+  <div class="container">
+    <div class="center">
+      <blockquote class="embedly-card">
+        <h4><a href="https://github.com/Gerrudo/SendFurryFriend">Gerrudo/SendFurryFriend</a></h4>
+        <p>Contribute to Gerrudo/SendFurryFriend development by creating an account on GitHub.</p>
+      </blockquote>
       <script async src="//cdn.embedly.com/widgets/platform.js" charset="UTF-8"></script>
     </div>
-    <div class="col-sm-4">
-      <h3>Get in Contact!</h3>
-      <p>You can email me: tom@tomsnetwork.uk</p>
-      <p>Or You can call our office directly: 0161 883 3013</p>
-    </div>
+  </div>
 
-    <div class="col-sm-4">
-      <h3>Visit our website</h3>
-      <p>Link to our website below!</p>
-      <a href="https://www.tomsnetwork.uk">www.tomsnetwork.uk</a>
+  <!-- Modal -->
+  <div class="modal fade" id="confusedModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Discord Whathook?</h4>
+        </div>
+        <div class="modal-body">
+          <p>From here you can enter in a discord webhook and it will post a random picture of a cat to your discord
+            channel.</p>
+          <p>If you're not sure how to get a discord webhook, click the cog icon on the channel you wish to send the
+            cat to, then create a webhook or copy your existing webhook's URI</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
     </div>
-    
-</div>
-  
+  </div>
 </body>
 <script>
-document.getElementById('sendcatbtn').style.visibility = 'hidden';
+  $('#sendcatbtn').hide();
 
-  function SendCat(){
+  function SendCat() {
     var item = {};
-    var webhookurl = document.getElementById('webhookurl').value;
-    item.webhookurl = webhookurl;
+    item.webhookurl = $("#webhookurl")[0].value;
     console.log(item);
     $.post('/sendcat', item);
-    document.getElementById("webhookurl").value = '';
-    document.getElementById('sendcatbtn').style.visibility = 'hidden';
+    $("#webhookurl")[0].value = '';
+    $('#sendcatbtn').fadeOut();
   };
 
-$("#webhookurl")
-  .focusout(function(){
-    if (document.getElementById("webhookurl").value === ''){
-      document.getElementById('sendcatbtn').style.visibility = 'hidden';
-    }else{
-      document.getElementById('sendcatbtn').style.visibility = 'visible';
-    };
+  function ClearField() {
+    $("#webhookurl")[0].value = '';
+    $('#sendcatbtn').fadeOut();
+  };
+
+  $("#webhookurl")
+    .focusout(function () {
+      if ($("#webhookurl")[0].value === '') {
+        $('#sendcatbtn').fadeOut();
+      } else {
+        $('#sendcatbtn').fadeIn();
+      };
+    });
+
+  $("#confused").on("click", function () {
+    $("confusedModal").modal();
+    $('#confusedModal').modal('toggle');
   });
 </script>
+
 </html>
